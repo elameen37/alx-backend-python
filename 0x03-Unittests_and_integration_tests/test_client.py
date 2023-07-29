@@ -19,7 +19,6 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_org(self, org_name, mock_json):
         """ Test method returns correct output """
         endpoint = 'https://api.github.com/orgs/{}'.format(org_name)
-        data = {}  # Define your 'data' here, if required for initialization
         spec = GithubOrgClient(data)
         spec.org()
         mock_json.assert_called_once_with(endpoint)
@@ -29,7 +28,6 @@ class TestGithubOrgClient(unittest.TestCase):
     ])
     def test_public_repos_url(self, name, result):
         """ Test method returns correct output """
-        data = {}  # Define your 'data' here, if required for initialization
         with patch('client.GithubOrgClient.org',
                    PropertyMock(return_value=result)):
             response = GithubOrgClient(name)._public_repos_url
